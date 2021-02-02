@@ -68,7 +68,28 @@ createCardsFromTechs(techs);
 
 
 function flipCard(){
+
+    if(game.setCard(this.id)){
     
-    this.classList.add(FLIP);
+        this.classList.add(FLIP);
+        if(game.secondCard){
+
+            if(game.checkMatch()){
+                game.clearCards();
+            }else{
+                setTimeout(function(){
+                    
+                    
+                    let firstCardView = document.getElementById(game.firstCard.id);
+                    let secondCardView = document.getElementById(game.secondCard.id);
+                    
+                    firstCardView.classList.remove(FLIP);
+                    secondCardView.classList.remove(FLIP);
+                    game.unflipCards();
+                },1000)
+            }
+        }
+
+    }
 
 }
